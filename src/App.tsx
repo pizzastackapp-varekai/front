@@ -1,3 +1,3 @@
 export const App = () => {
-	return <div>PizzaStack</div>
+	return <h1 className="font-bold text-3xl text-red-500">🍕 PizzaStack</h1>
 }

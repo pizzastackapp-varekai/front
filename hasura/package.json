@@ -1,0 +1,11 @@
+{
+  "name": "hasura",
+  "version": "1.0.0",
+  "license": "MIT",
+  "devDependencies": {
+    "hasura-cli": "^2.14.0"
+  }, 
+  "scripts":{
+    "start": "hasura console"
+  }
+}

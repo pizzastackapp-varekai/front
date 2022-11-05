@@ -2,7 +2,8 @@ import { CssBaseline } from '@mui/material'
 import { Fragment, useEffect, useState } from 'react'
 import { Admin, DataProvider, Loading, Resource } from 'react-admin'
 import buildHasuraProvider from 'ra-data-hasura'
-import { MenuList } from './modules/menu/components/menu-list/menu-list.components'
+import { MenuList } from './modules/menu/components/menu-list/menu-list.component'
+import { MenuEdit } from './modules/menu/components/menu-edit/menu-edot.component'
 
 export const App = () => {
 	const [dataProvider, setDataProvider] =
@@ -27,7 +28,7 @@ export const App = () => {
 		<Fragment>
 			<CssBaseline />
 			<Admin dataProvider={dataProvider}>
-				<Resource name="menu" list={MenuList} />
+				<Resource name="menu" list={MenuList} edit={MenuEdit} />
 			</Admin>
 		</Fragment>
 	)

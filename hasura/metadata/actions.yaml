@@ -1,6 +1,12 @@
-actions: []
+actions:
+  - name: register
+    definition:
+      kind: synchronous
+      handler: http://host.docker.internal:8888/.netlify/functions/register
 custom_types:
   enums: []
-  input_objects: []
-  objects: []
+  input_objects:
+    - name: AdminRegisterInput
+  objects:
+    - name: AdminRegisterOutput
   scalars: []

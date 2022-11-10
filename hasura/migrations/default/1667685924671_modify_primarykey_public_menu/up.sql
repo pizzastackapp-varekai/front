@@ -1,6 +1,0 @@
-BEGIN TRANSACTION;
-ALTER TABLE "public"."menu" DROP CONSTRAINT "menu_pkey";
-
-ALTER TABLE "public"."menu"
-    ADD CONSTRAINT "menu_pkey" PRIMARY KEY ("title");
-COMMIT TRANSACTION;

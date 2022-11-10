@@ -43,19 +43,19 @@ escape-string-regexp@^1.0.5:
   integrity sha512-vbRorB5FUQWvla16U8R/qgaFIya2qGzwDrNmCZuYKrbdSUMG6I1ZCGQRefkRVhuOkIGVne7BQ35DSfo1qvJqFg==
 
 follow-redirects@^1.14.0:
-  version "1.15.2"
-  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.15.2.tgz#b460864144ba63f2681096f274c4e57026da2c13"
-  integrity sha512-VQLG33o04KaQ8uYi2tVNbdrWp1QWxNNea+nmIB4EVM28v0hmP17z7aG1+wAkNzVq4KeXTq3221ye5qTJP91JwA==
+  version "1.15.1"
+  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.15.1.tgz#0ca6a452306c9b276e4d3127483e29575e207ad5"
+  integrity sha512-yLAMQs+k0b2m7cVxpS1VKJVvoz7SS9Td1zss3XRwXj+ZDH00RJgnuLx7E44wx02kQLrdM3aOOy+FpzS7+8OizA==
 
 has-flag@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/has-flag/-/has-flag-3.0.0.tgz#b5d454dc2199ae225699f3467e5a07f3b955bafd"
   integrity sha512-sKJf1+ceQBr4SMkvQnBDNDtf4TXpVhVGateu0t918bl30FnbE2m4vNLX+VWe/dpjlb+HugGYzW7uQXH98HPEYw==
 
-hasura-cli@^2.14.0:
-  version "2.14.0"
-  resolved "https://registry.yarnpkg.com/hasura-cli/-/hasura-cli-2.14.0.tgz#62de970f8b5411d0df8857eafce9ec3f45e06d9f"
-  integrity sha512-sA3UwV3P5ADujxArp7SSpJG7wFNqcqLlhY9BBpbTqtvXG9FpxbKCfd/IzOHVG/lUxDWGrZOQLeDR9L1iaOi+XA==
+hasura-cli@^2.9.0:
+  version "2.9.0"
+  resolved "https://registry.yarnpkg.com/hasura-cli/-/hasura-cli-2.9.0.tgz#458e173c12b10db4986a2fd4f507b94566f962e5"
+  integrity sha512-TWVnG2HS0Q/QrwHelUmwW3LlwQLjRZpssBNcA7vEmx8ZBz/DA4ZuwqQbi+EtRoW2dt783SbqJq5G2u80/91RZg==
   dependencies:
     axios "^0.21.1"
     chalk "^2.4.2"

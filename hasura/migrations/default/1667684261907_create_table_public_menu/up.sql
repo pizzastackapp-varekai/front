@@ -1,1 +1,0 @@
-CREATE TABLE "public"."menu" ("id" uuid NOT NULL, "title" text NOT NULL, "weight" Numeric NOT NULL, "image" text NOT NULL, "price" numeric NOT NULL, "ingredients" text NOT NULL, PRIMARY KEY ("id") , UNIQUE ("id"));

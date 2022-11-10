@@ -1,5 +1,5 @@
 type Mutation {
-  register(
+  adminRegister(
     admin: AdminRegisterInput!
   ): AdminRegisterOutput
 }

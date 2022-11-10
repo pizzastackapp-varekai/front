@@ -1,7 +1,5 @@
-mutation InsertAdmin($password: String = "", $username: String = "") {
-	insert_admin(objects: { password: $password, username: $username }) {
-		returning {
-			id
-		}
+mutation InsertAdmin($password: String, $username: String) {
+	insert_admin_one(object: { username: $username, password: $password }) {
+		id
 	}
 }

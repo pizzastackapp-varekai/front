@@ -1,12 +1,8 @@
 import { Handler } from '@netlify/functions'
-import { GraphQLClient } from 'graphql-request'
 import jwt from 'jsonwebtoken'
 import crypto from 'crypto'
-import { getSdk } from '../common/sdk'
-interface AdminRegisterInput {
-	username: string
-	password: string
-}
+import { AdminRegisterInput } from '../common/sdk'
+import { api } from '../common/api'
 
 const handler: Handler = async (event, context) => {
 	const { body, headers } = event
@@ -24,16 +20,19 @@ const handler: Handler = async (event, context) => {
 
 	const input: AdminRegisterInput = JSON.parse(body!).input.admin
 
-	const sdk = getSdk(new GraphQLClient('http://localhost:8080/v1/graphql'))
-
 	const password = crypto
 		.pbkdf2Sync(input.password, 'myadminsecretkey', 1000, 64, 'sha512')
 		.toString('hex')
 
-	const data = await sdk.InsertAdmin({
-		username: input.username,
-		password,
-	})
+	const data = await api.InsertAdmin(
+		{
+			username: input.username,
+			password,
+		},
+		{
+			'x-hasura-admin-secret': 'mypizzastacksecretkey',
+		}
+	)
 
 	const accessToken = jwt.sign(
 		{

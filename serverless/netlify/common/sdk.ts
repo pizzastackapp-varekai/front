@@ -17,6 +17,16 @@ export type Scalars = {
   uuid: any;
 };
 
+export type AdminLoginInput = {
+  password: Scalars['String'];
+  username: Scalars['String'];
+};
+
+export type AdminLoginOutput = {
+  __typename?: 'AdminLoginOutput';
+  accessToken: Scalars['String'];
+};
+
 export type AdminRegisterInput = {
   password: Scalars['String'];
   username: Scalars['String'];
@@ -176,21 +186,6 @@ export type Admin_Set_Input = {
   username?: InputMaybe<Scalars['String']>;
 };
 
-/** Streaming cursor of the table "admin" */
-export type Admin_Stream_Cursor_Input = {
-  /** Stream column input with initial value */
-  initial_value: Admin_Stream_Cursor_Value_Input;
-  /** cursor ordering */
-  ordering?: InputMaybe<Cursor_Ordering>;
-};
-
-/** Initial value of the column from where the streaming should start */
-export type Admin_Stream_Cursor_Value_Input = {
-  id?: InputMaybe<Scalars['uuid']>;
-  password?: InputMaybe<Scalars['String']>;
-  username?: InputMaybe<Scalars['String']>;
-};
-
 /** update columns of table "admin" */
 export enum Admin_Update_Column {
   /** column name */
@@ -199,20 +194,6 @@ export enum Admin_Update_Column {
   Password = 'password',
   /** column name */
   Username = 'username'
-}
-
-export type Admin_Updates = {
-  /** sets the columns of the filtered rows to the given values */
-  _set?: InputMaybe<Admin_Set_Input>;
-  where: Admin_Bool_Exp;
-};
-
-/** ordering argument of a cursor */
-export enum Cursor_Ordering {
-  /** ascending ordering of the cursor */
-  Asc = 'ASC',
-  /** descending ordering of the cursor */
-  Desc = 'DESC'
 }
 
 /** columns and relationships of "menu" */
@@ -398,24 +379,6 @@ export type Menu_Stddev_Samp_Fields = {
   weight?: Maybe<Scalars['Float']>;
 };
 
-/** Streaming cursor of the table "menu" */
-export type Menu_Stream_Cursor_Input = {
-  /** Stream column input with initial value */
-  initial_value: Menu_Stream_Cursor_Value_Input;
-  /** cursor ordering */
-  ordering?: InputMaybe<Cursor_Ordering>;
-};
-
-/** Initial value of the column from where the streaming should start */
-export type Menu_Stream_Cursor_Value_Input = {
-  id?: InputMaybe<Scalars['uuid']>;
-  image?: InputMaybe<Scalars['String']>;
-  ingredients?: InputMaybe<Scalars['String']>;
-  price?: InputMaybe<Scalars['numeric']>;
-  title?: InputMaybe<Scalars['String']>;
-  weight?: InputMaybe<Scalars['numeric']>;
-};
-
 /** aggregate sum on columns */
 export type Menu_Sum_Fields = {
   __typename?: 'menu_sum_fields';
@@ -438,14 +401,6 @@ export enum Menu_Update_Column {
   /** column name */
   Weight = 'weight'
 }
-
-export type Menu_Updates = {
-  /** increments the numeric columns with given value of the filtered values */
-  _inc?: InputMaybe<Menu_Inc_Input>;
-  /** sets the columns of the filtered rows to the given values */
-  _set?: InputMaybe<Menu_Set_Input>;
-  where: Menu_Bool_Exp;
-};
 
 /** aggregate var_pop on columns */
 export type Menu_Var_Pop_Fields = {
@@ -492,14 +447,10 @@ export type Mutation_Root = {
   update_admin?: Maybe<Admin_Mutation_Response>;
   /** update single row of the table: "admin" */
   update_admin_by_pk?: Maybe<Admin>;
-  /** update multiples rows of table: "admin" */
-  update_admin_many?: Maybe<Array<Maybe<Admin_Mutation_Response>>>;
   /** update data of the table: "menu" */
   update_menu?: Maybe<Menu_Mutation_Response>;
   /** update single row of the table: "menu" */
   update_menu_by_pk?: Maybe<Menu>;
-  /** update multiples rows of table: "menu" */
-  update_menu_many?: Maybe<Array<Maybe<Menu_Mutation_Response>>>;
 };
 
 
@@ -576,12 +527,6 @@ export type Mutation_RootUpdate_Admin_By_PkArgs = {
 
 
 /** mutation root */
-export type Mutation_RootUpdate_Admin_ManyArgs = {
-  updates: Array<Admin_Updates>;
-};
-
-
-/** mutation root */
 export type Mutation_RootUpdate_MenuArgs = {
   _inc?: InputMaybe<Menu_Inc_Input>;
   _set?: InputMaybe<Menu_Set_Input>;
@@ -594,12 +539,6 @@ export type Mutation_RootUpdate_Menu_By_PkArgs = {
   _inc?: InputMaybe<Menu_Inc_Input>;
   _set?: InputMaybe<Menu_Set_Input>;
   pk_columns: Menu_Pk_Columns_Input;
-};
-
-
-/** mutation root */
-export type Mutation_RootUpdate_Menu_ManyArgs = {
-  updates: Array<Menu_Updates>;
 };
 
 /** Boolean expression to compare columns of type "numeric". All fields are combined with logical 'AND'. */
@@ -635,6 +574,8 @@ export type Query_Root = {
   __typename?: 'query_root';
   /** fetch data from the table: "admin" */
   admin: Array<Admin>;
+  /** Login admin */
+  adminLogin?: Maybe<AdminLoginOutput>;
   /** fetch aggregated fields from the table: "admin" */
   admin_aggregate: Admin_Aggregate;
   /** fetch data from the table: "admin" using primary key columns */
@@ -654,6 +595,11 @@ export type Query_RootAdminArgs = {
   offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Admin_Order_By>>;
   where?: InputMaybe<Admin_Bool_Exp>;
+};
+
+
+export type Query_RootAdminLoginArgs = {
+  admin: AdminLoginInput;
 };
 
 
@@ -701,16 +647,12 @@ export type Subscription_Root = {
   admin_aggregate: Admin_Aggregate;
   /** fetch data from the table: "admin" using primary key columns */
   admin_by_pk?: Maybe<Admin>;
-  /** fetch data from the table in a streaming manner: "admin" */
-  admin_stream: Array<Admin>;
   /** fetch data from the table: "menu" */
   menu: Array<Menu>;
   /** fetch aggregated fields from the table: "menu" */
   menu_aggregate: Menu_Aggregate;
   /** fetch data from the table: "menu" using primary key columns */
   menu_by_pk?: Maybe<Menu>;
-  /** fetch data from the table in a streaming manner: "menu" */
-  menu_stream: Array<Menu>;
 };
 
 
@@ -737,13 +679,6 @@ export type Subscription_RootAdmin_By_PkArgs = {
 };
 
 
-export type Subscription_RootAdmin_StreamArgs = {
-  batch_size: Scalars['Int'];
-  cursor: Array<InputMaybe<Admin_Stream_Cursor_Input>>;
-  where?: InputMaybe<Admin_Bool_Exp>;
-};
-
-
 export type Subscription_RootMenuArgs = {
   distinct_on?: InputMaybe<Array<Menu_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -766,13 +701,6 @@ export type Subscription_RootMenu_By_PkArgs = {
   id: Scalars['uuid'];
 };
 
-
-export type Subscription_RootMenu_StreamArgs = {
-  batch_size: Scalars['Int'];
-  cursor: Array<InputMaybe<Menu_Stream_Cursor_Input>>;
-  where?: InputMaybe<Menu_Bool_Exp>;
-};
-
 /** Boolean expression to compare columns of type "uuid". All fields are combined with logical 'AND'. */
 export type Uuid_Comparison_Exp = {
   _eq?: InputMaybe<Scalars['uuid']>;
@@ -786,6 +714,13 @@ export type Uuid_Comparison_Exp = {
   _nin?: InputMaybe<Array<Scalars['uuid']>>;
 };
 
+export type GetAdminByUsernameQueryVariables = Exact<{
+  username?: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type GetAdminByUsernameQuery = { __typename?: 'query_root', admin: Array<{ __typename?: 'admin', id: any, password: string }> };
+
 export type InsertAdminMutationVariables = Exact<{
   password?: InputMaybe<Scalars['String']>;
   username?: InputMaybe<Scalars['String']>;
@@ -795,6 +730,14 @@ export type InsertAdminMutationVariables = Exact<{
 export type InsertAdminMutation = { __typename?: 'mutation_root', insert_admin_one?: { __typename?: 'admin', id: any } | null };
 
 
+export const GetAdminByUsernameDocument = gql`
+    query GetAdminByUsername($username: String = "") {
+  admin(where: {username: {_eq: $username}}) {
+    id
+    password
+  }
+}
+    `;
 export const InsertAdminDocument = gql`
     mutation InsertAdmin($password: String, $username: String) {
   insert_admin_one(object: {username: $username, password: $password}) {
@@ -810,6 +753,9 @@ const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationTy
 
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
+    GetAdminByUsername(variables?: GetAdminByUsernameQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetAdminByUsernameQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetAdminByUsernameQuery>(GetAdminByUsernameDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetAdminByUsername', 'query');
+    },
     InsertAdmin(variables?: InsertAdminMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<InsertAdminMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<InsertAdminMutation>(InsertAdminDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'InsertAdmin', 'mutation');
     }

@@ -2,8 +2,9 @@
   kind: postgres
   configuration:
     connection_info:
-      database_url:
-        from_env: HASURA_GRAPHQL_DATABASE_URL
+      database_url: postgres://postgres:postgrespassword@postgres:5432/postgres
       isolation_level: read-committed
       use_prepared_statements: false
+  customization:
+    naming_convention: hasura-default
   tables: "!include default/tables/tables.yaml"

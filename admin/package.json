@@ -26,7 +26,6 @@
     "start": "craco start",
     "build": "craco build",
     "test": "craco test"
-    
   },
   "eslintConfig": {
     "extends": [
@@ -48,6 +47,7 @@
   },
   "devDependencies": {
     "@craco/craco": "^7.0.0",
+    "graphql-tag": "^2.12.6",
     "react-app-alias": "^2.2.2"
   }
 }
